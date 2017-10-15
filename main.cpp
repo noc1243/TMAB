@@ -13,6 +13,8 @@
 #include <iterator>
 #include <cstdlib>
 #include "CMatriz.h"
+#include <conio.h>
+#include <windows.h>
 
 using namespace std;
 
@@ -137,11 +139,175 @@ void gravarLista (string fileName, vector <CMatriz> matrizes)
 int main ()
 {
 
-	vector <CMatriz> matrizes = lerLista ("lista_1.txt");
+    vector <CMatriz> mainList;
+    bool flagExit = false;
+    int flagOption = 0;
+    int firstMatrix, secondMatrix;
+    string fileName;
 
+    while (!flagExit)
+    {
 
-	gravarLista ("lista_2.txt", matrizes);
+        system("cls");
+        cout << "TMAB 2017.2 - TRABALHO 3 - CALCULADORA DE MATRIZES" << endl;
+        cout << "Autores: Diogo Nocera Magalhaes e Bruno Machado Afonso" << endl;
+        cout << "\n" << "M E N U   P R I N C I P A L" << "\n\n" << endl;
+        cout << "1 - CARREGAR MATRIZES DE ARQUIVO DE LISTA" << endl;
+        cout << "2 - APAGAR LISTA CARREGADA" << endl;
+        cout << "3 - GRAVAR LISTA EM NOVO ARQUIVO" << endl;
+        cout << "4 - REALIZAR SOMA DE MATRIZES ( + )" << endl;
+        cout << "5 - REALIZAR MULTIPLICACAO DE MATRIZ POR ESCALAR ( * )" << endl;
+        cout << "6 - REALIZAR MULTIPLICACAO DE MATRIZES ( * )" << endl;
+        cout << "7 - TRANSPOSTA DE MATRIZ ( ~ )" << endl;
+        cout << "8 - EXIBIR UMA MATRIZ DA LISTA" << endl;
+        cout << "9 - EXIBIR A LISTA COMPLETA" << endl;
+        cout << "0 - S A I R \n\n" << endl;
+        cout << "OPCAO:  ";
+        cin >> flagOption;
 
+        if (flagOption == 1)
+        {
+            system("cls");
+            cout << "DIGITE O NOME DO AQUIVO (INCLUINDO '.txt', ARQUIVO PRECISA ESTAR NO MESMO DIRETORIO DO EXECUTAVEL) \n" << endl;
+            cout << "NOME DO ARQUIVO:  ";
+            cin >> fileName;
+            mainList = lerLista(fileName);
+
+            system("cls");
+            cout << "LISTA ACESSADA! \n\n" << endl;
+            cout << "Pressione ENTER para continuar ... " << endl;
+            getch();
+        }
+        else if (flagOption == 2)
+        {
+            mainList.resize(0);
+
+            system("cls");
+            cout << "LISTA ZERADA! \n\n" << endl;
+            cout << "Pressione ENTER para continuar ... " << endl;
+            getch();
+        }
+        else if (flagOption == 3)
+        {
+            system("cls");
+            cout << "DIGITE O NOME DO AQUIVO (INCLUINDO '.txt') \n" << endl;
+            cout << "NOME DO ARQUIVO:  ";
+            cin >> fileName;
+            gravarLista(fileName, mainList);
+
+            system("cls");
+            cout << "LISTA GRAVADA! \n\n" << endl;
+            cout << "Pressione ENTER para continuar ... " << endl;
+            getch();
+        }
+        else if (flagOption == 4)
+        {
+            system("cls");
+            cout << "ESCOLHA O PRIMEIRO NUMERO DA MATRIZ DA LISTA: \n" << endl;
+            cout << "NUMERO:  ";
+            cin >> firstMatrix;
+            cout << "ESCOLHA O SEGUNDO NUMERO DA MATRIZ DA LISTA: \n" << endl;
+            cout << "NUMERO:  ";
+            cin >> secondMatrix;
+
+            system("cls");
+            cout << "RESULTADO \n\n" << endl;
+            CMatriz tmp_mat = mainList[firstMatrix-1] + mainList[secondMatrix-1];
+            mainList.push_back(tmp_mat);
+            cout << tmp_mat << endl;
+
+            cout << "Pressione ENTER para continuar ... " << endl;
+            getch();
+        }
+        else if (flagOption == 5)
+        {
+            system("cls");
+            cout << "ESCOLHA O PRIMEIRO NUMERO DA MATRIZ DA LISTA: \n" << endl;
+            cout << "NUMERO:  ";
+            cin >> firstMatrix;
+            cout << "ESCOLHA O ESCALAR PARA MULTIPLICACAO: \n" << endl;
+            cout << "NUMERO:  ";
+            cin >> secondMatrix;
+
+            system("cls");
+            cout << "RESULTADO \n\n" << endl;
+            CMatriz tmp_mat = mainList[firstMatrix-1] * secondMatrix;
+            mainList.push_back(tmp_mat);
+            cout << tmp_mat << endl;
+
+            cout << "Pressione ENTER para continuar ... " << endl;
+            getch();
+        }
+        else if (flagOption == 6)
+        {
+            system("cls");
+            cout << "ESCOLHA O PRIMEIRO NUMERO DA MATRIZ DA LISTA: \n" << endl;
+            cout << "NUMERO:  ";
+            cin >> firstMatrix;
+            cout << "ESCOLHA O SEGUNDO NUMERO DA MATRIZ DA LISTA: \n" << endl;
+            cout << "NUMERO:  ";
+            cin >> secondMatrix;
+
+            system("cls");
+            cout << "RESULTADO \n\n" << endl;
+            CMatriz tmp_mat = mainList[firstMatrix-1] * mainList[secondMatrix-1];
+            mainList.push_back(tmp_mat);
+            cout << tmp_mat << endl;
+
+            cout << "Pressione ENTER para continuar ... " << endl;
+            getch();
+        }
+        else if (flagOption == 7)
+        {
+            system("cls");
+            cout << "ESCOLHA O NUMERO DA MATRIZ DA LISTA: \n" << endl;
+            cout << "NUMERO:  ";
+            cin >> firstMatrix;
+
+            system("cls");
+            cout << "RESULTADO \n\n" << endl;
+            CMatriz tmp_mat = ~mainList[firstMatrix-1];
+            mainList.push_back(tmp_mat);
+            cout << tmp_mat << endl;
+
+            cout << "Pressione ENTER para continuar ... " << endl;
+            getch();
+        }
+        else if (flagOption == 8)
+        {
+            system("cls");
+            cout << "ESCOLHA O NUMERO DA MATRIZ DA LISTA: \n" << endl;
+            cout << "NUMERO:  ";
+            cin >> firstMatrix;
+
+            system("cls");
+            cout << "EXIBINDO \n\n" << endl;
+            cout << mainList[firstMatrix-1] << endl;
+
+            cout << "Pressione ENTER para continuar ... " << endl;
+            getch();
+        }
+        else if (flagOption == 9)
+        {
+
+            system("cls");
+            cout << "EXIBINDO \n\n" << endl;
+
+            for (int i = 0; i < mainList.size(); i++)
+            {
+                cout << "MATRIZ #" << i+1 << endl;
+                cout << mainList[i] << endl << endl;
+            }
+
+            cout << "Pressione ENTER para continuar ... " << endl;
+            getch();
+        }
+        else if (flagOption == 0)
+        {
+            flagExit = true;
+        }
+
+    }
 
 	return 0;
 }

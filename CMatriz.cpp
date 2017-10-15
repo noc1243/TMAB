@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <cstdlib>
 #include "CMatriz.h"
 
 using namespace std;
@@ -40,6 +41,8 @@ CMatriz CMatriz::operator+(const CMatriz &rhs)
 	for(unsigned int i(0); i < Temp.row; i++)
 		for(unsigned int j(0); j < Temp.col; j++)
 			Temp.matriz[i][j] = matriz[i][j] + rhs.matriz[i][j];
+    Temp.col = col;
+    Temp.row = row;
 	return Temp;
 }
 
@@ -66,6 +69,8 @@ CMatriz CMatriz::operator*(const int &rhs)
 			Temp.matriz[i][j]*=rhs;
 		}
 	}
+	Temp.col = col;
+    Temp.row = row;
 	return Temp;
 }
 
@@ -92,6 +97,8 @@ CMatriz CMatriz::operator*(const CMatriz &rhs)
 		}
 	}
 
+    Temp.col = col;
+    Temp.row = row;
 	return Temp;
 }
 
@@ -105,6 +112,8 @@ CMatriz CMatriz::operator~()
 			Temp.matriz [i][j] = matriz[j][i];
 		}
 	}
+	Temp.col = col;
+    Temp.row = row;
 	return Temp;
 }
 
