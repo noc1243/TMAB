@@ -14,9 +14,15 @@ using namespace std;
 
 CMatriz::CMatriz (int col, int row, vector <vector <int> > matriz): col(col), row(row), matriz (matriz) {}
 
-CMatriz::CMatriz (int col, int row): col(col), row(row) {}
+CMatriz::CMatriz (int col, int row): col(col), row(row)
+{
+	matriz.assign (row,vector<int> (col));
+}
 
-CMatriz::CMatriz (): col(4), row(4) {}
+CMatriz::CMatriz (): col(4), row(4)
+{
+	matriz.assign (row,vector<int> (col));
+}
 
 ostream &operator<<(ostream &os, const CMatriz &rhs)
 {
@@ -62,22 +68,21 @@ CMatriz &CMatriz::operator=(const CMatriz &rhs)
 CMatriz CMatriz::operator*(const int &rhs)
 {
 	CMatriz Temp(col, row, matriz);
-	for (int i=0; i< Temp.col; i++)
+	for (int i=0; i< Temp.row; i++)
 	{
-		for (int j=0; j< Temp.row; j++)
+		for (int j=0; j< Temp.col; j++)
 		{
 			Temp.matriz[i][j]*=rhs;
 		}
+		cout << endl;
 	}
-	Temp.col = col;
-    Temp.row = row;
 	return Temp;
 }
 
 CMatriz CMatriz::operator*(const CMatriz &rhs)
 {
 	int i, j, k;
-	vector<vector<int> > temp(rhs.col, vector<int>(row, 0));
+	vector<vector<int> > temp(row, vector<int>(rhs.col, 0));
 	CMatriz Temp (rhs.col, row, temp);
 
 	if (col != rhs.row)
@@ -97,14 +102,12 @@ CMatriz CMatriz::operator*(const CMatriz &rhs)
 		}
 	}
 
-    Temp.col = col;
-    Temp.row = row;
 	return Temp;
 }
 
 CMatriz CMatriz::operator~()
 {
-	CMatriz Temp(col, row, matriz);
+	CMatriz Temp(row, col);
 	for (int i=0; i <col; i++)
 	{
 		for (int j=0; j<row; j++)
@@ -112,8 +115,6 @@ CMatriz CMatriz::operator~()
 			Temp.matriz [i][j] = matriz[j][i];
 		}
 	}
-	Temp.col = col;
-    Temp.row = row;
 	return Temp;
 }
 

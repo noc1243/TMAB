@@ -213,7 +213,9 @@ int main ()
             system("cls");
             cout << "RESULTADO \n\n" << endl;
             CMatriz tmp_mat = mainList[firstMatrix-1] + mainList[secondMatrix-1];
+
             mainList.push_back(tmp_mat);
+
             cout << tmp_mat << endl;
 
             cout << "Pressione ENTER para continuar ... " << endl;
@@ -230,9 +232,12 @@ int main ()
             cin >> secondMatrix;
 
             system("cls");
-            cout << "RESULTADO \n\n" << endl;
+
             CMatriz tmp_mat = mainList[firstMatrix-1] * secondMatrix;
-            mainList.push_back(tmp_mat);
+
+            mainList.push_back (tmp_mat);
+
+
             cout << tmp_mat << endl;
 
             cout << "Pressione ENTER para continuar ... " << endl;
@@ -251,7 +256,9 @@ int main ()
             system("cls");
             cout << "RESULTADO \n\n" << endl;
             CMatriz tmp_mat = mainList[firstMatrix-1] * mainList[secondMatrix-1];
-            mainList.push_back(tmp_mat);
+
+            mainList.push_back (tmp_mat);
+
             cout << tmp_mat << endl;
 
             cout << "Pressione ENTER para continuar ... " << endl;
@@ -267,7 +274,9 @@ int main ()
             system("cls");
             cout << "RESULTADO \n\n" << endl;
             CMatriz tmp_mat = ~mainList[firstMatrix-1];
-            mainList.push_back(tmp_mat);
+
+            mainList.push_back (tmp_mat);
+
             cout << tmp_mat << endl;
 
             cout << "Pressione ENTER para continuar ... " << endl;
