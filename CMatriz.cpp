@@ -15,6 +15,8 @@ CMatriz::CMatriz (int col, int row, vector <vector <int> > matriz): col(col), ro
 
 CMatriz::CMatriz (int col, int row): col(col), row(row) {}
 
+CMatriz::CMatriz (): col(4), row(4) {}
+
 ostream &operator<<(ostream &os, const CMatriz &rhs)
 {
 	for(int i(0); i < rhs.row; ++i)
@@ -49,6 +51,8 @@ CMatriz &CMatriz::operator=(const CMatriz &rhs)
 	for(int i(0); i < this->row; ++i)
 		for(int j(0); j < this->col; ++j)
 			this->matriz[i][j] = rhs.matriz[i][j];
+	this->col = rhs.col;
+	this->row = rhs.row;
 	return *this;
 }
 
@@ -71,7 +75,12 @@ CMatriz CMatriz::operator*(const CMatriz &rhs)
 	vector<vector<int> > temp(rhs.col, vector<int>(row, 0));
 	CMatriz Temp (rhs.col, row, temp);
 
-	// Multiplying matrix firstMatrix and secondMatrix and storing in array mult.
+	if (col != rhs.row)
+	{
+		cout << "Wrong matrix dimensions!!" << endl;
+		return Temp;
+	}
+
 	for(i = 0; i < row; ++i)
 	{
 		for(j = 0; j < rhs.col; ++j)
@@ -82,7 +91,6 @@ CMatriz CMatriz::operator*(const CMatriz &rhs)
 			}
 		}
 	}
-
 
 	return Temp;
 }

@@ -22,6 +22,7 @@ class CMatriz
 	vector <vector <int> > matriz;
 	CMatriz (int, int, vector<vector<int> > matriz);
 	CMatriz (int, int);
+	CMatriz ();
 
 
 	friend ostream & operator<<(ostream &os, const CMatriz &rhs);
